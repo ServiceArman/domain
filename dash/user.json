@@ -1,0 +1,37 @@
+[
+    {
+        "user_id": "78910",
+        "name": "John Doe",
+        "phone": "+1234567890",
+        "email": "user@gmail.com",
+        "password": "1234"
+    },
+    {
+        "user_id": "56780",
+        "name": "Jane Smith",
+        "phone": "+0987654321",
+        "email": "1234@gmail.com",
+        "password": "1234"
+    },
+    {
+        "user_id": "12345",
+        "name": "Alice Johnson",
+        "phone": "+1122334455",
+        "email": "alice@example.com",
+        "password": "password123"
+    },
+    {
+        "user_id": "67890",
+        "name": "Bob Smith",
+        "phone": "+1555666777",
+        "email": "bob@example.com",
+        "password": "password123"
+    },
+    {
+        "user_id": "23456",
+        "name": "Emily Davis",
+        "phone": "+1777888999",
+        "email": "emily@example.com",
+        "password": "password123"
+    }
+]
