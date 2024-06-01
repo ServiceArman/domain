@@ -4,35 +4,54 @@ document.addEventListener('DOMContentLoaded', function() {
     // Redirect to login page if user is not logged in
     window.location.href = 'login.html';
   } else {
-    // Fetch domain data from order.json
+    // Fetch domain data and populate accordion
     fetch('order.json')
       .then(response => response.json())
-      .then(orders => {
-        const userOrders = orders.filter(order => order.user_id === currentUser.user_id);
-        const domainDetailsAccordion = document.getElementById('collapseDomainDetails');
-        userOrders.forEach(order => {
-          const domainCard = document.createElement('div');
-          domainCard.classList.add('card', 'mt-3'); // Added mt-3 for spacing between cards
-          domainCard.innerHTML = `
-            <div class="card-body">
-              <h5 class="card-title">Domain: ${order.domain_name}</h5>
-              <p class="card-text">Registered Date: ${order.registration_date}</p>
-              <p class="card-text">Expiry Date: ${order.expiry_date}</p>
-              <p class="card-text">Status: <span class="${getStatusColor(order.status)}">${order.status}</span></p>
-            </div>
-          `;
-          domainDetailsAccordion.appendChild(domainCard);
-        });
+      .then(data => {
+        const userDomains = data.domain_info.filter(domain => domain.user_id === currentUser.user_id);
+        const accordion = document.getElementById('accordion');
+        if (userDomains.length === 0) {
+          accordion.innerHTML = '<p>No domains found.</p>';
+        } else {
+          userDomains.forEach(domain => {
+            const card = createDomainCard(domain);
+            accordion.appendChild(card);
+          });
+        }
       });
   }
 });
 
-function getStatusColor(status) {
-  if (status === 'Active') {
-    return 'text-success';
-  } else if (status === 'Pending') {
-    return 'text-warning';
-  } else if (status === 'Expired') {
-    return 'text-danger';
-  }
+function createDomainCard(domain) {
+  const card = document.createElement('div');
+  card.classList.add('card');
+
+  const cardHeader = document.createElement('div');
+  cardHeader.classList.add('card-header');
+  cardHeader.innerHTML = `
+    <h5 class="mb-0">
+      <button class="btn btn-link" data-toggle="collapse" data-target="#collapse${domain.domain_name}" aria-expanded="true" aria-controls="collapse${domain.domain_name}">
+        ${domain.domain_name}
+      </button>
+    </h5>
+  `;
+
+  const collapseDiv = document.createElement('div');
+  collapseDiv.id = `collapse${domain.domain_name}`;
+  collapseDiv.classList.add('collapse');
+  collapseDiv.setAttribute('aria-labelledby', `heading${domain.domain_name}`);
+  collapseDiv.setAttribute('data-parent', '#accordion');
+  collapseDiv.innerHTML = `
+    <div class="card-body">
+      <p>Registrar: ${domain.registrar}</p>
+      <p>Registration Date: ${domain.registration_date}</p>
+      <p>Expiry Date: ${domain.expiry_date}</p>
+      <p>Status: ${domain.status}</p>
+      <!-- Additional details can be added here -->
+    </div>
+  `;
+
+  card.appendChild(cardHeader);
+  card.appendChild(collapseDiv);
+  return card;
 }
