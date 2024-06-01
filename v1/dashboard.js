@@ -1,20 +1,38 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-</head>
-<body>
-    <div class="container">
-        <h1 class="mt-5">Hi! <span id="userName"></span></h1>
-        <div id="orderHistory" class="mt-5">
-            <!-- Order history will be loaded here -->
-        </div>
-    </div>
+$(document).ready(function() {
+    const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
 
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script src="dashboard.js"></script>
-</body>
-</html>
+    if (!loggedInUser) {
+        window.location.href = 'login.html';
+        return;
+    }
+
+    $('#userName').text(loggedInUser.name);
+
+    $.getJSON('order.json', function(orders) {
+        const userOrders = orders.filter(order => order.email === loggedInUser.email);
+
+        if (userOrders.length > 0) {
+            userOrders.forEach(order => {
+                $('#orderHistory').append(`
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <h5 class="card-title">Order ID: ${order.order_id}</h5>
+                            <p class="card-text">Order Date: ${order.order_history[0].order_date}</p>
+                            <p class="card-text">Total Amount: ${order.order_history[0].total_amount}</p>
+                            <p class="card-text">Order Status: ${order.order_history[0].order_status}</p>
+                            <button class="btn btn-primary view-details" data-order-id="${order.order_id}">View Details</button>
+                        </div>
+                    </div>
+                `);
+            });
+
+            $('.view-details').click(function() {
+                const orderId = $(this).data('order-id');
+                localStorage.setItem('selectedOrderId', orderId);
+                window.location.href = 'orderdetails.html';
+            });
+        } else {
+            $('#orderHistory').text('No order history found.');
+        }
+    });
+});
