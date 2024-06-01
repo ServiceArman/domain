@@ -4,31 +4,32 @@ document.addEventListener('DOMContentLoaded', function() {
     // Redirect to login page if user is not logged in
     window.location.href = 'login.html';
   } else {
-    document.getElementById('userName').textContent = currentUser.name;
-    // Fetch order history data from JSON file
+    // Display welcome message
+    const welcomeMessage = document.getElementById('welcomeMessage');
+    welcomeMessage.textContent = `Hi, ${currentUser.name}!`;
+
+    // Fetch order history data and populate
     fetch('order.json')
       .then(response => response.json())
-      .then(orders => {
-        const userOrders = orders.filter(order => order.user_id === currentUser.user_id);
-        if (userOrders.length > 0) {
+      .then(data => {
+        const userOrders = data.domain_info.filter(order => order.user_id === currentUser.user_id);
+        const orderHistory = document.getElementById('orderHistory');
+        if (userOrders.length === 0) {
+          orderHistory.innerHTML = '<p>No orders found.</p>';
+        } else {
+          orderHistory.innerHTML = '<h2>Order History</h2>';
           userOrders.forEach(order => {
-            const orderCard = document.createElement('div');
-            orderCard.classList.add('card', 'mb-3');
-            orderCard.innerHTML = `
-              <div class="card-body">
-                <h5 class="card-title">Order ID: ${order.order_id}</h5>
-                <p class="card-text">Domain: ${order.domain_name}</p>
-                <p class="card-text">Expiration Date: ${order.expiry_date}</p>
-                <p class="card-text">Status: ${order.status}</p>
+            orderHistory.innerHTML += `
+              <div class="card mb-3">
+                <div class="card-body">
+                  <h5 class="card-title">${order.domain_name}</h5>
+                  <p class="card-text">Registration Date: ${order.registration_date}</p>
+                  <p class="card-text">Expiry Date: ${order.expiry_date}</p>
+                  <p class="card-text">Status: ${order.status}</p>
+                </div>
               </div>
             `;
-            document.getElementById('orderHistory').appendChild(orderCard);
           });
-        } else {
-          // Display message if user has no orders
-          const noOrdersMessage = document.createElement('p');
-          noOrdersMessage.textContent = 'You have no orders.';
-          document.getElementById('orderHistory').appendChild(noOrdersMessage);
         }
       });
   }
