@@ -8,7 +8,7 @@ $(document).ready(function() {
     }
 
     $.getJSON('order.json', function(orders) {
-        const order = orders.find(order => order.order_id === selectedOrderId);
+        const order = orders.find(order => order.order_id === selectedOrderId && order.customer_id === loggedInUser.user_id);
 
         if (order) {
             $('#orderDetails').html(`
@@ -70,9 +70,18 @@ $(document).ready(function() {
                                 </div>
                                 <div id="collapseControlPanel" class="collapse" aria-labelledby="headingControlPanel" data-parent="#orderAccordion">
                                     <div class="card-body">
-                                        <p>URL: <input type="text" class="form-control" value="${order.domain_info[0].control_panel_access.url}" readonly></p>
-                                        <p>Username: <input type="text" class="form-control" value="${order.domain_info[0].control_panel_access.username}" readonly></p>
-                                        <p>Password: <input type="text" class="form-control" value="${order.domain_info[0].control_panel_access.password}" readonly></p>
+                                        <div class="form-group">
+                                            <label for="controlPanelURL">Control Panel URL</label>
+                                            <input type="text" class="form-control" id="controlPanelURL" value="${order.domain_info[0].control_panel_access.url}" readonly>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="controlPanelUsername">Username</label>
+                                            <input type="text" class="form-control" id="controlPanelUsername" value="${order.domain_info[0].control_panel_access.username}" readonly>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="controlPanelPassword">Password</label>
+                                            <input type="text" class="form-control" id="controlPanelPassword" value="${order.domain_info[0].control_panel_access.password}" readonly>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -87,9 +96,9 @@ $(document).ready(function() {
                                 <div id="collapseContact" class="collapse" aria-labelledby="headingContact" data-parent="#orderAccordion">
                                     <div class="card-body">
                                         <p>Registrar Name: ${order.domain_info[0].owner.name}</p>
-                                        <p>Customer Name: ${order.domain_info[0].owner.name}</p>
-                                        <p>Customer Number: ${loggedInUser.phone}</p>
-                                        <p>Customer Email: ${loggedInUser.email}</p>
+                                        <p>Customer Name: ${order.name.first_name} ${order.name.last_name}</p>
+                                        <p>Customer Number: ${order.phone}</p>
+                                        <p>Customer Email: ${order.email}</p>
                                         <p>Customer Address: ${order.address.street}, ${order.address.city}, ${order.address.state}, ${order.address.zip_code}, ${order.address.country}</p>
                                     </div>
                                 </div>
@@ -109,10 +118,10 @@ $(document).ready(function() {
                                             <input type="text" class="form-control" id="transferCompany">
                                         </div>
                                         <div class="form-group">
-                                            <label for="customerPhone">Customer Phone</label>
-                                            <input type="text" class="form-control" id="customerPhone" value="${loggedInUser.phone}">
+                                            <label for="customerMobile">Customer Mobile</label>
+                                            <input type="text" class="form-control" id="customerMobile">
                                         </div>
-                                        <button class="btn btn-primary">Submit</button>
+                                        <button class="btn btn-primary" id="submitTransfer">Submit</button>
                                     </div>
                                 </div>
                             </div>
@@ -120,15 +129,8 @@ $(document).ready(function() {
                     </div>
                 </div>
             `);
-
-            $('#saveNameservers').click(function() {
-                const ns1 = $('#ns1').val();
-                const ns2 = $('#ns2').val();
-                // Save logic here
-                alert(`Name Servers saved: ${ns1}, ${ns2}`);
-            });
         } else {
-            $('#orderDetails').text('No order details found.');
+            $('#orderDetails').html('<p>No order details found.</p>');
         }
     });
 });
