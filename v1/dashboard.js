@@ -1,31 +1,20 @@
-$(document).ready(function() {
-    var loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'));
-    if (!loggedInUser) {
-        window.location.href = 'login.html';
-    } else {
-        $('#welcomeMessage').text(`Hi! ${loggedInUser.name}`);
-        $('#userProfile').text(loggedInUser.name).click(function() {
-            window.location.href = 'profile.html';
-        });
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-5">Hi! <span id="userName"></span></h1>
+        <div id="orderHistory" class="mt-5">
+            <!-- Order history will be loaded here -->
+        </div>
+    </div>
 
-        $.getJSON('order.json', function(orders) {
-            var userOrders = orders.filter(order => order.email === loggedInUser.email);
-            if (userOrders.length > 0) {
-                userOrders.forEach(order => {
-                    $('#orderHistory').append(`
-                        <div class="card mt-3">
-                            <div class="card-body">
-                                <h5 class="card-title">Order ID: ${order.order_id}</h5>
-                                <p class="card-text">Order Date: ${order.order_date}</p>
-                                <p class="card-text">Total Amount: ${order.total_amount}</p>
-                                <p class="card-text">Order Status: ${order.order_status}</p>
-                            </div>
-                        </div>
-                    `);
-                });
-            } else {
-                $('#orderHistory').text('No orders found.');
-            }
-        });
-    }
-});
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="dashboard.js"></script>
+</body>
+</html>
