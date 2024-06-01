@@ -1,6 +1,7 @@
 [
     {
         "order_id": "123456",
+        "customer_id": "78910",
         "name": {
             "first_name": "John",
             "last_name": "Doe"
@@ -55,6 +56,114 @@
                 "order_date": "2023-11-20T11:15:00Z",
                 "total_amount": 75.49,
                 "order_status": "Delivered"
+            }
+        ]
+    },
+    {
+        "order_id": "654321",
+        "customer_id": "78910",
+        "name": {
+            "first_name": "John",
+            "last_name": "Doe"
+        },
+        "domain_info": [
+            {
+                "domain_name": "example.net",
+                "registrar": "Namecheap",
+                "registration_date": "2021-01-01",
+                "expiry_date": "2026-01-01",
+                "owner": {
+                    "name": "John Doe",
+                    "contact_email": "johndoe@example.net"
+                },
+                "name_servers": [
+                    "ns1.example.net",
+                    "ns2.example.net"
+                ],
+                "control_panel_access": {
+                    "url": "https://wordpress.com/login",
+                    "username": "arman",
+                    "password": "1234"
+                }
+            }
+        ],
+        "email": "user@gmail.com",
+        "phone": "+1234567890",
+        "address": {
+            "street": "123 Elm St",
+            "city": "Springfield",
+            "state": "IL",
+            "zip_code": "62704",
+            "country": "USA"
+        },
+        "date_of_birth": "1985-05-15",
+        "account_created": "2022-01-10T09:30:00Z",
+        "last_login": "2024-06-01T12:45:00Z",
+        "preferences": {
+            "newsletter_subscribed": true,
+            "preferred_language": "en",
+            "preferred_currency": "USD"
+        },
+        "order_history": [
+            {
+                "order_id": "654321",
+                "order_date": "2023-11-20T11:15:00Z",
+                "total_amount": 75.49,
+                "order_status": "Delivered"
+            }
+        ]
+    },
+    {
+        "order_id": "789012",
+        "customer_id": "56789",
+        "name": {
+            "first_name": "Jane",
+            "last_name": "Smith"
+        },
+        "domain_info": [
+            {
+                "domain_name": "example.org",
+                "registrar": "Bluehost",
+                "registration_date": "2019-01-01",
+                "expiry_date": "2024-01-01",
+                "owner": {
+                    "name": "Jane Smith",
+                    "contact_email": "janesmith@example.org"
+                },
+                "name_servers": [
+                    "ns1.example.org",
+                    "ns2.example.org"
+                ],
+                "control_panel_access": {
+                    "url": "https://wordpress.com/login",
+                    "username": "janesmith",
+                    "password": "5678"
+                }
+            }
+        ],
+        "email": "jane.smith@gmail.com",
+        "phone": "+1234567891",
+        "address": {
+            "street": "456 Maple St",
+            "city": "Springfield",
+            "state": "IL",
+            "zip_code": "62704",
+            "country": "USA"
+        },
+        "date_of_birth": "1990-01-01",
+        "account_created": "2022-01-10T09:30:00Z",
+        "last_login": "2024-06-01T12:45:00Z",
+        "preferences": {
+            "newsletter_subscribed": true,
+            "preferred_language": "en",
+            "preferred_currency": "USD"
+        },
+        "order_history": [
+            {
+                "order_id": "789012",
+                "order_date": "2023-06-01T14:30:00Z",
+                "total_amount": 89.99,
+                "order_status": "Shipped"
             }
         ]
     }
