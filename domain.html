@@ -3,90 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Domain Management</title>
+  <title>Domain Details</title>
   <!-- Bootstrap CSS -->
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-
-<div class="container mt-5">
-  <h1>Domain Management</h1>
-
-  <div id="accordion">
-
-    <!-- Domain Details -->
-    <div class="card">
-      <div class="card-header" id="domainDetails">
-        <h5 class="mb-0">
-          <button class="btn btn-link" data-toggle="collapse" data-target="#collapseDomainDetails" aria-expanded="true" aria-controls="collapseDomainDetails">
-            Domain Details
-          </button>
-        </h5>
-      </div>
-
-      <div id="collapseDomainDetails" class="collapse show" aria-labelledby="domainDetails" data-parent="#accordion">
-        <div class="card-body">
-          <p>Domain Name: <span id="domainNamePlaceholder"></span></p>
-          <p>Registered: <span id="registeredPlaceholder"></span></p>
-          <p>Registered Date: <span id="registeredDatePlaceholder"></span></p>
-          <button class="btn btn-primary">Renew</button>
-          <button class="btn btn-danger">Cancel</button>
-        </div>
-      </div>
+  <div class="container mt-5">
+    <h1>Domain Details</h1>
+    <div id="accordion">
+      <!-- Domain details will be dynamically populated here -->
     </div>
-
-    <!-- Name Servers -->
-    <div class="card">
-      <div class="card-header" id="nameServers">
-        <h5 class="mb-0">
-          <button class="btn btn-link" data-toggle="collapse" data-target="#collapseNameServers" aria-expanded="false" aria-controls="collapseNameServers">
-            Name Servers
-          </button>
-        </h5>
-      </div>
-
-      <div id="collapseNameServers" class="collapse" aria-labelledby="nameServers" data-parent="#accordion">
-        <div class="card-body">
-          <input type="text" class="form-control mb-2" placeholder="Enter Name Server 1">
-          <input type="text" class="form-control mb-2" placeholder="Enter Name Server 2">
-          <button class="btn btn-primary">Save</button>
-        </div>
-      </div>
-    </div>
-
-    <!-- Contact Information -->
-    <div class="card">
-      <div class="card-header" id="contactInformation">
-        <h5 class="mb-0">
-          <button class="btn btn-link" data-toggle="collapse" data-target="#collapseContactInformation" aria-expanded="false" aria-controls="collapseContactInformation">
-            Contact Information
-          </button>
-        </h5>
-      </div>
-
-      <div id="collapseContactInformation" class="collapse" aria-labelledby="contactInformation" data-parent="#accordion">
-        <div class="card-body">
-          <p>Registrar Name: <span id="registrarNamePlaceholder"></span></p>
-          <p>Customer Name: <span id="customerNamePlaceholder"></span></p>
-          <p>Customer Number: <span id="customerNumberPlaceholder"></span></p>
-          <p>Customer Email: <span id="customerEmailPlaceholder"></span></p>
-          <p>Customer Address: <span id="customerAddressPlaceholder"></span></p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Domain Transfer -->
-    <div class="card">
-      <!-- Add your implementation here -->
-    </div>
-
   </div>
-</div>
 
-<!-- Bootstrap JS and dependencies -->
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
+  <!-- Bootstrap JS and dependencies -->
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script src="domain.js"></script>
 </body>
 </html>
